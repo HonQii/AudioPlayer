@@ -8,6 +8,11 @@
 
 import AVFoundation
 
+#if os(iOS)
+    import VIMediaCache
+#endif
+
+
 extension AudioPlayer {
     /// Handles quality adjustment events.
     ///
@@ -45,7 +50,12 @@ extension AudioPlayer {
         }
 
         let cip = currentItemProgression
-        let item = AVPlayerItem(url: url)
+        #if os(iOS)
+            let item = cacheLoadManager.playerItem(with: url)!
+            VICacheManager.cacheConfiguration(for: url)
+        #else
+            let item = AVPlayerItem(url: url)
+        #endif
         self.updatePlayerItemForBufferingStrategy(item)
 
         qualityIsBeingChanged = true

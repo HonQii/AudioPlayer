@@ -1,0 +1,27 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target 'AudioPlayer iOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AudioPlayer iOS
+  pod 'VIMediaCache'
+
+end
+
+target 'AudioPlayer OSX' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AudioPlayer OSX
+
+end
+
+target 'AudioPlayer tvOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AudioPlayer tvOS
+
+end

@@ -11,6 +11,10 @@ import AVFoundation
     import MediaPlayer
 #endif
 
+#if os(iOS)
+    import VIMediaCache
+#endif
+
 /// An `AudioPlayer` instance is used to play `AudioPlayerItem`. It's an easy to use AVPlayer with simple methods to
 /// handle the whole playing audio process.
 ///
@@ -46,6 +50,11 @@ public class AudioPlayer: NSObject {
     /// The retry event producer.
     var retryEventProducer = RetryEventProducer()
 
+    // MARK: Cache
+    #if os(iOS)
+        lazy var cacheLoadManager = VIResourceLoaderManager()
+    #endif
+    
     // MARK: Player
 
     /// The queue containing items to play.
@@ -106,7 +115,12 @@ public class AudioPlayer: NSObject {
                 pausedForInterruption = false
                 
                 //Create new AVPlayerItem
-                let playerItem = AVPlayerItem(url: info.url)
+                #if os(iOS)
+                    let playerItem = cacheLoadManager.playerItem(with: info.url)!
+                    VICacheManager.cacheConfiguration(for: info.url)
+                #else
+                    let playerItem = AVPlayerItem(url: info.url)
+                #endif
                 
                 if #available(iOS 10.0, tvOS 10.0, OSX 10.12, *) {
                     playerItem.preferredForwardBufferDuration = self.preferredForwardBufferDuration
