@@ -72,6 +72,12 @@ extension AudioPlayer {
             play(items: items)
         }
     }
+    
+    public func move(item from: Int, to: Int) {
+        if let queue = queue {
+            queue.move(from: from, to: to)
+        }
+    }
 
     /// Removes an item at a specific index in the queue.
     ///

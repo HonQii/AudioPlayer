@@ -222,6 +222,15 @@ class AudioItemQueue {
             items.remove(at: index)
         }
     }
+    
+    func move(from: Int, to: Int) {
+        let item = queue.remove(at: from)
+        if let index = items.firstIndex(of: item) {
+            items.remove(at: index)
+        }
+        queue.insert(item, at: to)
+        items.insert(item, at: to)
+    }
 
     /// Returns a boolean value indicating whether an item should be consider playable in the queue.
     ///
