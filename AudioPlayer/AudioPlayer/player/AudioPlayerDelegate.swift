@@ -72,6 +72,9 @@ public protocol AudioPlayerDelegate: class {
     ///   - range: The time range that the audio player loaded.
     ///   - item: Current item.
     func audioPlayer(_ audioPlayer: AudioPlayer, didLoad range: TimeRange, for item: AudioItem)
+    
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, updatePlayInfoCenter item: AudioItem) -> Dictionary?
 }
 
 public extension AudioPlayerDelegate {

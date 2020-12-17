@@ -358,11 +358,15 @@ public class AudioPlayer: NSObject {
     func updateNowPlayingInfoCenter() {
         #if os(iOS) || os(tvOS)
             if let item = currentItem {
-                MPNowPlayingInfoCenter.default().ap_update(
-                    with: item,
-                    duration: currentItemDuration,
-                    progression: currentItemProgression,
-                    playbackRate: player?.rate ?? 0)
+                if let infos = delegate?.audioPlayer(self, updatePlayInfoCenter: item) {
+                    MPNowPlayingInfoCenter.default().nowPlayingInfo = infos
+                } else {
+                    MPNowPlayingInfoCenter.default().ap_update(
+                        with: item,
+                        duration: currentItemDuration,
+                        progression: currentItemProgression,
+                        playbackRate: player?.rate ?? 0)
+                }
             } else {
                 MPNowPlayingInfoCenter.default().nowPlayingInfo = nil
             }
