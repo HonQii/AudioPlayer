@@ -74,7 +74,7 @@ public protocol AudioPlayerDelegate: class {
     func audioPlayer(_ audioPlayer: AudioPlayer, didLoad range: TimeRange, for item: AudioItem)
     
     
-    func audioPlayer(_ audioPlayer: AudioPlayer, updatePlayInfoCenter item: AudioItem) -> Dictionary?
+    func audioPlayer(_ audioPlayer: AudioPlayer, updatePlayInfoCenter item: AudioItem) -> Dictionary<String, Any>?
 }
 
 public extension AudioPlayerDelegate {
@@ -99,5 +99,9 @@ public extension AudioPlayerDelegate {
     }
 
     func audioPlayer(_ audioPlayer: AudioPlayer, didLoad range: TimeRange, for item: AudioItem) {
+    }
+    
+    func audioPlayer(_ audioPlayer: AudioPlayer, updatePlayInfoCenter item: AudioItem) -> Dictionary<String, Any>? {
+        return nil
     }
 }
